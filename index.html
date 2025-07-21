@@ -3,491 +3,405 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo: Refer - Intelligente Workflow</title>
-
+    <title>ATS Demo - Refer Integratie</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
     <style>
-/* ------------------- */
-/* --- CSS Variables --- */
-/* ------------------- */
-:root {
-    --gradient-start: #97d045;
-    --gradient-end: #02527d;
-    --tag-bg: #e5e7eb;
-    --tag-text: #4b5569;
-    --bg-color: #f4f4f4;
-    --card-bg: #ffffff;
-    --text-dark: #111827;
-    --text-medium: #4b5569;
-    --text-light: #94a3b8;
-    --border-color: #e2e8f0;
-    --font-family: 'Inter', sans-serif;
-    --shadow-md: 0 4px 8px 0 rgb(0 0 0 / 0.07);
-    --shadow-lg: 0 12px 24px 0 rgb(0 0 0 / 0.09);
-    --border-radius-xl: 16px;
-    --border-radius-lg: 12px;
-    --border-radius-md: 10px;
-    --border-radius-sm: 7px;
-}
-/* ------------------- */
-/* --- Base & Reset --- */
-/* ------------------- */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; background: var(--bg-color); }
-body {
-    font-family: var(--font-family);
-    background-color: var(--bg-color);
-    color: var(--text-dark);
-    line-height: 1.6;
-    font-size: 1rem;
-}
-h1, h2, h3, h4 { font-weight: 600; line-height: 1.3; }
-h1 { font-size: 2.6rem; letter-spacing: -0.5px; }
-h2 { font-size: 2rem; margin-bottom: 0.75em; }
-h3 { font-size: 1.4rem; }
-h4 { font-size: 1.1rem; }
-p { color: var(--text-medium); font-size: 1.05rem; }
-a { color: var(--gradient-end); text-decoration: none; transition: color .2s; }
-a:hover, a:focus { color: var(--gradient-start); }
-ul { list-style: none; padding: 0; }
-ul li { position: relative; padding-left: 28px; margin-bottom: 0.75rem; color: var(--text-medium); }
-ul li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    top: -2px;
-    color: var(--gradient-start);
-    font-weight: 700;
-}
-img { max-width: 100%; display: block; border-radius: var(--border-radius-md); }
-button, input, textarea { font-family: inherit; }
-hr { border: none; border-top: 1px solid var(--border-color); margin: 2.5rem 0; opacity: .75; }
+        /* --- Base & Reset --- */
+        :root {
+            --ats-green: #8DC63F;
+            --ats-bg: #F5F5F5;
+            --ats-header-bg: #FFFFFF;
+            --ats-border: #E0E0E0;
+            --ats-text-dark: #212121;
+            --ats-text-medium: #616161;
+            --ats-text-light: #9E9E9E;
+            --ats-font: 'Roboto', sans-serif;
+            --refer-font: 'Inter', sans-serif;
+            --refer-gradient-start: #97d045;
+            --refer-gradient-end: #02527d;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: var(--ats-font);
+            background-color: var(--ats-bg);
+            color: var(--ats-text-dark);
+            font-size: 14px;
+        }
 
-/* ------------------- */
-/* --- Demo Panel --- */
-/* ------------------- */
-.demo-container {
-    background: #1f2937;
-    padding: 3rem 1.5rem;
-    text-align: center;
-    color: #f9fafb;
-}
-.demo-container h1 {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-    color: #fff;
-}
-.demo-container .subtitle {
-    font-size: 1.1rem;
-    color: #d1d5db;
-    max-width: 650px;
-    margin: 0 auto 2.5rem auto;
-}
-.ats-card {
-    background: var(--card-bg);
-    max-width: 840px;
-    margin: 0 auto;
-    padding: 2rem;
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-lg);
-    text-align: left;
-}
-.ats-card h2 {
-    font-size: 1.25rem;
-    color: var(--text-medium);
-    margin: 0;
-}
-.ats-card .vacancy-title {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: var(--text-dark);
-    margin-bottom: 1.5rem;
-}
-#demo-activate-btn {
-    width: 100%;
-    font-size: 1.1rem;
-    padding: 1rem;
-}
-.loader {
-    width: 24px;
-    height: 24px;
-    border: 3px solid #FFF;
-    border-bottom-color: transparent;
-    border-radius: 50%;
-    display: inline-block;
-    box-sizing: border-box;
-    animation: rotation 1s linear infinite;
-    margin: 1.5rem auto 0 auto;
-}
-@keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        /* --- ATS Layout --- */
+        .ats-container { width: 100%; }
+        .top-nav {
+            display: flex;
+            align-items: center;
+            background: var(--ats-header-bg);
+            border-bottom: 1px solid var(--ats-border);
+            padding: 0 20px;
+            height: 50px;
+        }
+        .top-nav .logo { color: var(--ats-green); font-weight: 700; font-size: 18px; }
+        .top-nav .nav-links { display: flex; gap: 20px; margin-left: 30px; }
+        .top-nav a { color: var(--ats-text-dark); text-decoration: none; }
 
-#ai-suggestions {
-    background: #f8fafc;
-    margin-top: -1rem; /* Overlap with card */
-    padding: 2.5rem 2rem 2rem 2rem;
-    border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
-    text-align: left;
-    display: none; /* Initially hidden */
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-#ai-suggestions.visible {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-}
-#ai-suggestions h3 {
-    font-size: 1.2rem;
-    color: var(--text-dark);
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-.profile-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
-.profile {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    background: var(--card-bg);
-    padding: 1rem;
-    border-radius: var(--border-radius-md);
-    border: 1px solid var(--border-color);
-}
-.profile img { width: 48px; height: 48px; border-radius: 50%; }
-.profile-info h4 { font-size: 1rem; margin: 0; }
-.profile-info p { font-size: 0.875rem; margin: 0; }
-#generate-page-btn { margin-top: 2rem; width: 100%; }
+        .main-content-area { padding: 20px; }
 
-/* ------------------- */
-/* --- Layout --- */
-/* ------------------- */
-.page-wrapper {
-    display: flex;
-    justify-content: center;
-    padding: 5rem 1.5rem 2.5rem 1.5rem;
-    background: var(--bg-color);
-}
-.vacancy-container {
-    width: 100%;
-    max-width: 840px;
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-}
-.section {
-    padding: 3rem 2rem;
-    background: var(--card-bg);
-    border-radius: var(--border-radius-xl);
-    box-shadow: var(--shadow-md);
-    border: 1px solid var(--border-color);
-    margin-bottom: 2.5rem;
-}
+        .vacancy-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .vacancy-header .title-group { display: flex; align-items: center; gap: 15px; }
+        .vacancy-header .icon { background: var(--ats-green); color: white; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 4px; }
+        .vacancy-header .icon svg { width: 24px; height: 24px; }
+        .vacancy-header h1 { font-size: 22px; margin: 0; }
+        .vacancy-header .recruiter-status { font-size: 13px; color: var(--ats-text-medium); }
+        .vacancy-header .actions button {
+            background: var(--ats-header-bg);
+            border: 1px solid var(--ats-border);
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: var(--ats-font);
+            font-size: 14px;
+        }
+        .vacancy-header .actions button.refer-btn {
+            background: var(--ats-green);
+            color: white;
+            border-color: var(--ats-green);
+            font-weight: 500;
+        }
 
-/* --- Header --- */
-.vacancy-header { text-align: left; }
-.location-tag {
-    display: inline-block;
-    background-color: var(--tag-bg);
-    color: var(--tag-text);
-    padding: 0.375rem 1rem;
-    border-radius: 99px;
-    font-weight: 500;
-    font-size: 0.875rem;
-    margin-bottom: 1.25rem;
-}
-.vacancy-header h1 { font-size: 2.5rem; color: var(--text-dark); font-weight: 700; }
-.salary { font-size: 1.25rem; color: var(--text-medium); font-weight: 500; margin-top: 0.75rem; }
+        .progress-bar {
+            display: flex;
+            background: #E9E9E9;
+            border-radius: 4px;
+            padding: 5px;
+            margin-bottom: 20px;
+        }
+        .progress-bar .step {
+            flex: 1;
+            text-align: center;
+            padding: 8px;
+            color: var(--ats-text-medium);
+            border-right: 1px solid #D4D4D4;
+        }
+        .progress-bar .step:last-child { border-right: none; }
+        .progress-bar .step.active {
+            background: var(--ats-header-bg);
+            color: var(--ats-text-dark);
+            font-weight: 500;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
 
-/* --- Referral Card --- */
-.referral-card {
-    display: flex;
-    align-items: center;
-    gap: 1.4rem;
-    background: linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
-    color: var(--card-bg);
-    border: none;
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-md);
-    padding: 2rem 2.5rem;
-    margin-bottom: 2.2rem;
-    flex-wrap: wrap;
-}
-.referral-content { flex: 1; min-width: 200px; }
-.referral-content h2 { font-size: 1.18rem; font-weight: 600; color: #fff; margin-bottom: 0.15em; }
-.referral-content p { color: #e0e7ff; font-size: 1.02rem; margin-bottom: 0; opacity: 0.94; }
-.btn.btn-secondary {
-    background-color: #fff;
-    color: var(--gradient-end);
-    font-weight: 600;
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.08);
-    transition: background 0.18s, color 0.18s, transform 0.12s;
-    margin-left: 0.5rem;
-}
-.btn.btn-secondary:hover { background: var(--tag-bg); color: var(--gradient-start); transform: translateY(-2px) scale(1.04); }
+        .main-card {
+            background: var(--ats-header-bg);
+            border: 1px solid var(--ats-border);
+            border-radius: 4px;
+        }
+        .tab-nav { display: flex; border-bottom: 1px solid var(--ats-border); }
+        .tab-nav .tab { padding: 12px 20px; color: var(--ats-text-medium); cursor: pointer; }
+        .tab-nav .tab.active {
+            color: var(--ats-green);
+            font-weight: 500;
+            border-bottom: 2px solid var(--ats-green);
+            margin-bottom: -1px;
+        }
 
-/* --- Job Details Card --- */
-.job-details article:not(:last-child) {
-    margin-bottom: 2.5rem;
-    padding-bottom: 2.5rem;
-    border-bottom: 1px solid var(--border-color);
-}
-.job-details h3 {
-    font-size: 1.25rem;
-    margin-bottom: 1.5rem;
-    color: var(--text-dark);
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-.job-details h3 svg { width: 24px; height: 24px; color: var(--gradient-start); }
+        .info-grid { padding: 25px; }
+        .info-grid h2 {
+            font-size: 16px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--ats-border);
+            color: var(--ats-text-dark);
+        }
+        .info-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 40px;
+        }
+        .field-group { display: flex; flex-direction: column; }
+        .field-group .label { font-size: 13px; color: var(--ats-text-medium); margin-bottom: 5px; }
+        .field-group .value { font-size: 14px; color: var(--ats-text-dark); }
 
-/* --- Buttons --- */
-.btn {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--border-radius-md);
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    transition: all 0.2s ease-in-out;
-    white-space: nowrap;
-    font-family: inherit;
-    font-size: 1rem;
-}
-.btn-primary { background-color: var(--gradient-start); color: var(--card-bg); }
-.btn-primary:hover { background-color: var(--gradient-end); }
+        /* --- Refer Modal --- */
+        .refer-modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(30, 41, 59, 0.6);
+            display: none; /* Initially hidden */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+        .refer-modal {
+            background: #FFFFFF;
+            font-family: var(--refer-font);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 550px;
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+        .refer-modal-header {
+            padding: 20px 25px;
+            background: linear-gradient(90deg, var(--refer-gradient-start) 0%, var(--refer-gradient-end) 100%);
+            color: white;
+        }
+        .refer-modal-header h2 { font-size: 22px; margin: 0; }
+        .refer-modal-header p { font-size: 16px; color: #E0E7FF; opacity: 0.9; }
 
-/* --- Share & Modal --- */
-.share-buttons-container { display: flex; gap: 1rem; justify-content: center; margin-top: 1.4rem; flex-wrap: wrap; }
-.btn-share { display: flex; align-items: center; gap: 0.6em; font-weight: 600; font-size: 1rem; padding: 0.75rem 1.25rem; border-radius: var(--border-radius-md); text-decoration: none; border: none; box-shadow: var(--shadow-md); transition: background 0.17s, color 0.17s, transform 0.13s; }
-.btn-share svg { width: 22px; height: 22px; }
-.btn-share.whatsapp { background: #25d366; color: #fff; }
-.btn-share.whatsapp:hover { background: #1ab955; color: #fff; transform: scale(1.04); }
-.btn-share.sms { background: #3b82f6; color: #fff; }
-.btn-share.sms:hover { background: #2563eb; color: #fff; transform: scale(1.04); }
-.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(30, 41, 59, 0.6); display: none; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(4px); overflow-y: auto; padding: 2rem; }
-.modal-content { background-color: var(--card-bg); padding: 2.5rem; border-radius: var(--border-radius-xl); width: 100%; max-width: 550px; position: relative; box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25); max-height: 90vh; overflow-y: auto; }
-.modal-close { position: absolute; top: 1rem; right: 1.25rem; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--text-medium); transition: color 0.2s; line-height: 1; }
-.modal-close:hover { color: var(--text-dark); }
-.modal-content h2 { font-size: 1.75rem; margin-bottom: 0.5rem; text-align: center; }
-.modal-content p { margin-bottom: 1.5rem; color: var(--text-medium); text-align: center; }
-.form-group { margin-bottom: 1.5rem; }
-.form-group label { display: block; margin-bottom: 0.625rem; font-weight: 500; font-size: 0.875rem; }
-.form-group textarea { width: 100%; background-color: var(--bg-color); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); padding: 0.875rem 1.125rem; font-size: 1rem; color: var(--text-dark); font-family: var(--font-family); transition: border-color 0.2s, box-shadow 0.2s; resize: vertical; min-height: 80px; }
-.form-group textarea:focus { outline: none; border-color: var(--gradient-start); box-shadow: 0 0 0 3px #e8fad5; }
+        .refer-modal-body { padding: 30px 25px; }
+        .refer-modal-step { display: none; }
+        .refer-modal-step.active { display: block; }
 
-/* --- Responsive --- */
-@media (max-width: 800px) {
-    .referral-card { flex-direction: column; align-items: flex-start; gap: 1rem; text-align: left; }
-    .referral-card .btn.btn-secondary { margin-left: 0; width: 100%; }
-}
-@media (max-width: 600px) {
-    .demo-container h1 { font-size: 1.5rem; }
-    .page-wrapper { padding: 2.5rem 1rem; }
-    .vacancy-header h1 { font-size: 1.8rem; }
-    .salary { font-size: 1.1rem; }
-    .modal-content { padding: 2.5rem 1.5rem; }
-    .modal-content h2 { font-size: 1.5rem; }
-    .share-buttons-container { flex-direction: column; }
-    .btn-share { width: 100%; justify-content: center; }
-}
+        .form-group { margin-bottom: 25px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; }
+        .form-group .input-wrapper { position: relative; }
+        .form-group .input-wrapper .currency { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--ats-text-medium); }
+        .form-group input[type="number"] {
+            width: 100%;
+            padding: 12px 15px 12px 35px;
+            border: 1px solid var(--ats-border);
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: var(--refer-font);
+        }
+        .refer-modal .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .refer-modal .btn-primary {
+            background: var(--refer-gradient-end);
+            color: white;
+        }
+        .refer-modal .btn-primary:hover { background: #014166; }
+
+        .refer-loader-container { text-align: center; padding: 40px 0; }
+        .refer-loader {
+            width: 48px; height: 48px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--refer-gradient-start);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px auto;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        #ai-results-container h3 { font-size: 20px; margin-bottom: 20px; }
+        .profile-list { display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px; }
+        .profile {
+            display: flex; align-items: center; gap: 15px;
+            padding: 15px; border-radius: 10px; border: 1px solid var(--ats-border);
+        }
+        .profile img { width: 48px; height: 48px; border-radius: 50%; }
+        .profile-info h4 { font-size: 16px; margin: 0; }
+        .profile-info p { font-size: 14px; margin: 0; color: var(--ats-text-medium); }
+
+        .modal-close-btn {
+            position: absolute; top: 15px; right: 15px; background: none; border: none;
+            cursor: pointer; color: white; opacity: 0.7; font-size: 28px; line-height: 1;
+        }
+        .modal-close-btn:hover { opacity: 1; }
     </style>
 </head>
 <body>
 
-    <div class="demo-container">
-        <h1>Demo: De Intelligente Workflow van Refer</h1>
-        <p class="subtitle">Dit is een simulatie van hoe een recruiter onze tool ervaart, direct vanuit zijn vertrouwde omgeving.</p>
-        
-        <div class="ats-card">
-            <h2>Huidige Vacature in uw ATS:</h2>
-            <p class="vacancy-title">Business Development Officer</p>
-            <button id="demo-activate-btn" class="btn btn-primary">Activeer via Refer</button>
-            <div id="loader-container" style="display: none;"><div class="loader"></div></div>
+    <div class="ats-container">
+        <nav class="top-nav">
+            <div class="logo">MySolution</div>
+            <div class="nav-links">
+                <a href="#">Hoofdpagina</a>
+                <a href="#">Chatter</a>
+                <a href="#">Accounts</a>
+                <a href="#">Zoek persoon</a>
+                <a href="#">Vacatures</a>
+                </div>
+        </nav>
 
-            <div id="ai-suggestions">
-                <h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 28px; height: 28px; color: var(--gradient-end);">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.572L16.5 21.75l-.398-1.178a3.375 3.375 0 00-2.456-2.456L12.5 18l1.178-.398a3.375 3.375 0 002.456-2.456L16.5 14.25l.398 1.178a3.375 3.375 0 002.456 2.456L20.5 18l-1.178.398a3.375 3.375 0 00-2.424 2.174z" />
-                    </svg>
-                    AI-Suggestie: Top-Referrers in uw Netwerk
-                </h3>
-                <div class="profile-container">
-                    <div class="profile">
-                        <img src="https://i.pravatar.cc/48?img=1" alt="Anna de Vries">
-                        <div class="profile-info">
-                            <h4>Anna de Vries</h4>
-                            <p>Goed netwerk in techniek</p>
-                        </div>
+        <main class="main-content-area">
+            <header class="vacancy-header">
+                <div class="title-group">
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.378 1.602a.75.75 0 00-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03zM21.75 7.908l-9 5.25v9l8.628-5.034a.75.75 0 00.372-.648V7.908zM3 7.908v8.628c0 .261.162.498.372.648L12 22.25v-9l-9-5.25z"/></svg>
                     </div>
-                    <div class="profile">
-                        <img src="https://i.pravatar.cc/48?img=2" alt="Pieter Jansen">
-                        <div class="profile-info">
-                            <h4>Pieter Jansen</h4>
-                            <p>Kent veel sales-professionals</p>
-                        </div>
-                    </div>
-                    <div class="profile">
-                        <img src="https://i.pravatar.cc/48?img=3" alt="Fatima El Amrani">
-                        <div class="profile-info">
-                            <h4>Fatima El Amrani</h4>
-                            <p>Connecties bij grote corporates</p>
-                        </div>
+                    <div>
+                        <h1>Vacature: Supply Chain Planner</h1>
+                        <div class="recruiter-status">Recruiter: Ylse Reuvers &nbsp;&nbsp; Status: Verkoop</div>
                     </div>
                 </div>
-                <button id="generate-page-btn" class="btn btn-secondary">Genereer & Bekijk Referral Pagina</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="page-wrapper" id="vacancy-section">
-        <main class="vacancy-container">
-
-            <header class="vacancy-header">
-                <div class="header-content">
-                    <span class="location-tag">Nijmegen</span>
-                    <h1>Business Development Officer</h1>
-                    <p class="salary">€ 3.500 - € 5.000 per maand</p>
+                <div class="actions">
+                    <button>+ Volgen</button>
+                    <button>Bewerken</button>
+                    <button id="refer-trigger-btn" class="refer-btn">Activeer via Refer</button>
+                    <button>Klonen</button>
                 </div>
             </header>
 
-            <section class="card referral-card">
-                <div class="referral-content">
-                    <h2>Ken jij de perfecte kandidaat?</h2>
-                    <p>Draag een professional aan en verdien een bonus van <strong>€1000</strong> bij een succesvolle plaatsing!</p>
-                </div>
-                <button class="btn btn-secondary" onclick="openModal()">Iemand aandragen</button>
-            </section>
+            <div class="progress-bar">
+                <div class="step">Backlog</div>
+                <div class="step">To-do</div>
+                <div class="step">Doing</div>
+                <div class="step">Done</div>
+                <div class="step active">✔ Scranfase aanduiden als voltooid</div>
+            </div>
 
-            <section class="card job-details">
-                <article>
-                    <h3>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08H4.125a2.25 2.25 0 00-2.25 2.25v12.54A2.25 2.25 0 004.125 21h11.218a2.25 2.25 0 002.124-1.618l.142-1.284A2.25 2.25 0 0018.061 15.75H15.75" /></svg>
-                        Over de functie
-                    </h3>
-                    <p>Als Business Development Officer ben je verantwoordelijk voor het creëren van new business en het uitbouwen van het klantennetwerk binnen de installatietechniek. Je bent een kei in het benaderen van prospects en het overtuigen van de meerwaarde van onze dienstverlening. Je signaleert kansen, trends en ontwikkelingen in de markt en vertaalt deze naar concrete acties.</p>
-                </article>
-                <article>
-                    <h3>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0l-.07.002z" /></svg>
-                        Wat wij zoeken
-                    </h3>
-                    <ul>
-                        <li>HBO werk- en denkniveau.</li>
-                        <li>Minimaal 3 jaar ervaring in een commerciële buitendienstfunctie.</li>
-                        <li>Kennis van de installatietechniek is een sterke pré.</li>
-                        <li>Resultaatgericht, proactief en hebt een passie voor sales.</li>
-                    </ul>
-                </article>
-            </section>
+            <div class="main-card">
+                <div class="tab-nav">
+                    <div class="tab">Sollicitaties (10+)</div>
+                    <div class="tab">Plaatsingen (3)</div>
+                    <div class="tab">Vacaturehistorie (3)</div>
+                </div>
+                <div class="tab-nav" style="border-top: 1px solid var(--ats-border);">
+                    <div class="tab active">Basis</div>
+                    <div class="tab">Publicatie</div>
+                    <div class="tab">Documenten</div>
+                    <div class="tab">Activiteit</div>
+                </div>
+
+                <div class="info-grid">
+                    <h2>Informatie</h2>
+                    <div class="info-fields">
+                        <div class="field-group"><div class="label">Vacaturenaam</div><div class="value">Supply Chain Planner</div></div>
+                        <div class="field-group"><div class="label">Actuele sollicitatiestatus (oud)</div><div class="value">-</div></div>
+                        <div class="field-group"><div class="label">Bedrijf</div><div class="value">Deinuts B.V.</div></div>
+                        <div class="field-group"><div class="label">Recordtype</div><div class="value">Opdracht</div></div>
+                        <div class="field-group"><div class="label">Contactpersoon</div><div class="value">Gerben van der Molen</div></div>
+                        <div class="field-group"><div class="label">Recruitmentfunnel</div><div class="value">Extern (W&S)</div></div>
+                        <div class="field-group"><div class="label">Eigenaar</div><div class="value">Floris Lenssen</div></div>
+                        <div class="field-group"><div class="label">Vacaturesoort</div><div class="value">Werving & Selectie</div></div>
+                        <div class="field-group"><div class="label">Business Manager</div><div class="value">Floris Lenssen</div></div>
+                        <div class="field-group"><div class="label">Status</div><div class="value">Verkoop</div></div>
+                        <div class="field-group"><div class="label">Recruiter</div><div class="value">Ylse Reuvers</div></div>
+                        <div class="field-group"><div class="label">Sprintdoel</div><div class="value">7/7 - Sprint 3: Zoeken, ...</div></div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 
-    <div id="referralModal" class="modal-overlay">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">×</button>
-            <h2>Nodig iemand uit</h2>
-            <p>Voeg een persoonlijk bericht toe en deel de uitnodiging. Jouw unieke code wordt automatisch meegestuurd.</p>
-            
-            <div class="form-group">
-                <label for="personalMessage">Voeg een persoonlijk bericht toe (optioneel)</label>
-                <textarea id="personalMessage" rows="3" placeholder="Ik zag deze vacature en moest aan je denken..."></textarea>
+    <div id="refer-modal-overlay" class="refer-modal-overlay">
+        <div id="refer-modal" class="refer-modal">
+            <button id="modal-close" class="modal-close-btn">&times;</button>
+            <div class="refer-modal-header">
+                <h2>Referral Campagne Activeren</h2>
+                <p>voor: Supply Chain Planner</p>
             </div>
-            
-            <div class="share-buttons-container">
-                <a href="#" id="whatsapp-share" class="btn-share whatsapp" target="_blank">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M16.6 14.2c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6s0-.3.1-.4.2-.2.4-.4c.1-.1.2-.3.3-.4.1-.2.1-.3 0-.4-.1-.1-.6-1.5-.8-2.1-.2-.5-.4-.5-.5-.5h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2 1 2.4c.1.1 1.5 2.3 3.7 3.2.5.2.9.4 1.2.5.5.2 1 .1 1.3-.1.4-.2.6-.8.8-1s.2-1.1.1-1.2c-.1-.1-.3-.2-.5-.3zM12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z" /></svg>
-                    <span>Deel via WhatsApp</span>
-                </a>
-                <a href="#" id="sms-share" class="btn-share sms" target="_blank">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512" width="24" height="24"><path d="M64 0C28.7 0 0 28.7 0 64V352c0 35.3 28.7 64 64 64h96v80c0 6.1 3.4 11.6 8.8 14.3s11.9 2.1 16.8-1.5L309.3 416H448c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64z"/></svg>
-                    <span>Deel via SMS</span>
-                </a>
-            </div>
+            <div class="refer-modal-body">
+                <div id="step1" class="refer-modal-step active">
+                    <div class="form-group">
+                        <label for="bonus-amount">Stel de referral bonus in</label>
+                        <div class="input-wrapper">
+                            <span class="currency">€</span>
+                            <input type="number" id="bonus-amount" placeholder="bijv. 1000" value="1000">
+                        </div>
+                    </div>
+                    <button id="start-campaign-btn" class="btn btn-primary">Start Campagne & Haal AI-Suggesties Op</button>
+                </div>
 
+                <div id="step2" class="refer-modal-step">
+                    <div class="refer-loader-container">
+                        <div class="refer-loader"></div>
+                        <p>AI analyseert uw netwerk voor de beste matches...</p>
+                    </div>
+                </div>
+
+                <div id="step3" class="refer-modal-step">
+                    <h3>AI-Suggestie: Top-Referrers</h3>
+                    <div class="profile-list">
+                        <div class="profile">
+                            <img src="https://i.pravatar.cc/48?img=4" alt="Profile">
+                            <div class="profile-info"><h4>Mark de Groot</h4><p>Sterk netwerk in logistiek & supply chain</p></div>
+                        </div>
+                        <div class="profile">
+                             <img src="https://i.pravatar.cc/48?img=5" alt="Profile">
+                            <div class="profile-info"><h4>Simone Gerritsen</h4><p>Heeft eerder succesvolle kandidaten aangebracht</p></div>
+                        </div>
+                    </div>
+                    <button id="generate-link-btn" class="btn btn-primary">Genereer & Kopieer Referral Link</button>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // --- Demo Panel Logic ---
-        const activateBtn = document.getElementById('demo-activate-btn');
-        const loaderContainer = document.getElementById('loader-container');
-        const aiSuggestions = document.getElementById('ai-suggestions');
-        const generatePageBtn = document.getElementById('generate-page-btn');
-        const vacancySection = document.getElementById('vacancy-section');
-
-        activateBtn.addEventListener('click', () => {
-            activateBtn.style.display = 'none';
-            loaderContainer.style.display = 'block';
-
-            // Simulate AI processing time
-            setTimeout(() => {
-                loaderContainer.style.display = 'none';
-                aiSuggestions.classList.add('visible');
-            }, 1500);
-        });
-
-        generatePageBtn.addEventListener('click', () => {
-            vacancySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-
-        // --- Modal & Sharing Logic ---
-        const modal = document.getElementById('referralModal');
-        const personalMessageEl = document.getElementById('personalMessage');
-        const whatsappShareBtn = document.getElementById('whatsapp-share');
-        const smsShareBtn = document.getElementById('sms-share');
-        
-        let personalCode = '';
-        let referralUrl = 'https://jouw-platform.com/apply/bdo-nijmegen'; // Gebruik een realistische demo URL
-
-        function generateReferralInfo() {
-            personalCode = 'REF' + Math.random().toString(36).substr(2, 6).toUpperCase();
-        }
-
-        function updateShareLinks() {
-            const personalMsg = personalMessageEl.value.trim();
-            const vacancyTitle = document.querySelector('.vacancy-header h1').textContent.trim();
+        document.addEventListener('DOMContentLoaded', () => {
+            const referTriggerBtn = document.getElementById('refer-trigger-btn');
+            const modalOverlay = document.getElementById('refer-modal-overlay');
+            const modalCloseBtn = document.getElementById('modal-close');
             
-            let baseText = personalMsg ? personalMsg : `Hoi! Ik zag deze vacature voor '${vacancyTitle}' en moest aan je denken. Misschien is het iets voor jou?`;
+            const step1 = document.getElementById('step1');
+            const step2 = document.getElementById('step2');
+            const step3 = document.getElementById('step3');
 
-            const fullShareText = `${baseText}\n\nBekijk de vacature en solliciteer hier: ${referralUrl}\n\nMijn unieke referral code is: ${personalCode}`;
+            const startCampaignBtn = document.getElementById('start-campaign-btn');
+            const generateLinkBtn = document.getElementById('generate-link-btn');
+
+            function openModal() {
+                // Reset to step 1 every time
+                step1.classList.add('active');
+                step2.classList.remove('active');
+                step3.classList.remove('active');
+                generateLinkBtn.textContent = 'Genereer & Kopieer Referral Link';
+                generateLinkBtn.disabled = false;
+                modalOverlay.style.display = 'flex';
+            }
+
+            function closeModal() {
+                modalOverlay.style.display = 'none';
+            }
+
+            referTriggerBtn.addEventListener('click', openModal);
+            modalCloseBtn.addEventListener('click', closeModal);
+            modalOverlay.addEventListener('click', (event) => {
+                if (event.target === modalOverlay) {
+                    closeModal();
+                }
+            });
+
+            startCampaignBtn.addEventListener('click', () => {
+                step1.classList.remove('active');
+                step2.classList.add('active');
+
+                // Simulate AI processing
+                setTimeout(() => {
+                    step2.classList.remove('active');
+                    step3.classList.add('active');
+                }, 2000);
+            });
             
-            whatsappShareBtn.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(fullShareText)}`;
-            smsShareBtn.href = `sms:?&body=${encodeURIComponent(fullShareText)}`;
-        }
-        
-        function openModal() {
-            generateReferralInfo();
-            updateShareLinks();
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
+            generateLinkBtn.addEventListener('click', () => {
+                // Simulate link generation and copy
+                navigator.clipboard.writeText('https://jouw-platform.com/refer/VAC7S83H').then(() => {
+                    generateLinkBtn.textContent = '✔ Link Gekopieerd!';
+                    generateLinkBtn.disabled = true;
+                    
+                    // Close modal after a short delay
+                    setTimeout(() => {
+                        closeModal();
+                    }, 1500);
+                });
+            });
 
-        function closeModal() {
-            modal.style.display = 'none';
-            document.body.style.overflow = '';
-        }
-        
-        // --- Event Listeners ---
-        personalMessageEl.addEventListener('input', updateShareLinks);
-
-        modal.addEventListener('click', (event) => {
-            if (event.target === modal) {
-                closeModal();
-            }
-        });
-        
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape' && modal.style.display === 'flex') {
-                closeModal();
-            }
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && modalOverlay.style.display === 'flex') {
+                    closeModal();
+                }
+            });
         });
     </script>
 </body>
