@@ -9,8 +9,10 @@
     --ats-text-light: #9E9E9E;
     --ats-font: 'Roboto', sans-serif;
     --refer-font: 'Inter', sans-serif;
-    --refer-gradient-start: #97d045;
-    --refer-gradient-end: #02527d;
+    
+    /* --- AANGEPASTE KLEUREN --- */
+    --refer-gradient-start: #86a6c6; /* Oorspronkelijk groen, nu uw kleur */
+    --refer-gradient-end: #86a6c6;   /* Oorspronkelijk blauw, nu uw kleur */
 }
 * { 
     box-sizing: border-box; 
@@ -180,7 +182,7 @@ body {
 
 /* --- Refer Modal --- */
 .refer-modal-overlay {
-    position: fixed;
+    position: fixed; 
     top: 0; 
     left: 0;
     width: 100%; 
@@ -204,6 +206,7 @@ body {
 }
 .refer-modal-header {
     padding: 20px 25px;
+    /* De gradient wordt nu een solide achtergrond met de nieuwe kleur */
     background: linear-gradient(90deg, var(--refer-gradient-start) 0%, var(--refer-gradient-end) 100%);
     color: white;
 }
@@ -265,11 +268,13 @@ body {
     transition: all 0.2s;
 }
 .refer-modal .btn-primary {
+    /* De knop gebruikt nu ook de nieuwe kleur */
     background: var(--refer-gradient-end);
     color: white;
 }
 .refer-modal .btn-primary:hover { 
-    background: #014166; 
+    /* --- AANGEPASTE HOVER-KLEUR --- */
+    background: #7091b3; /* Iets donkerdere tint van #86a6c6 */
 }
 
 .refer-loader-container { 
@@ -280,6 +285,7 @@ body {
     width: 48px; 
     height: 48px;
     border: 5px solid #f3f3f3;
+    /* De loader animatie gebruikt nu de nieuwe kleur */
     border-top: 5px solid var(--refer-gradient-start);
     border-radius: 50%;
     animation: spin 1s linear infinite;
