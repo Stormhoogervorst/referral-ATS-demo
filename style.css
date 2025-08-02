@@ -1,6 +1,6 @@
 /* --- Base & Reset --- */
 :root {
-    --ats-green: #8DC63F;
+    --ats-blue: #86a6c6;
     --ats-bg: #F5F5F5;
     --ats-header-bg: #FFFFFF;
     --ats-border: #E0E0E0;
@@ -39,7 +39,7 @@ body {
     height: 50px;
 }
 .top-nav .logo { 
-    color: var(--ats-green); 
+    color: var(--ats-blue); 
     font-weight: 700; 
     font-size: 18px; 
 }
@@ -69,7 +69,7 @@ body {
     gap: 15px; 
 }
 .vacancy-header .icon { 
-    background: var(--ats-green); 
+    background: var(--ats-blue); 
     color: white; 
     width: 40px; 
     height: 40px; 
@@ -99,9 +99,9 @@ body {
     font-size: 14px;
 }
 .vacancy-header .actions button.refer-btn {
-    background: var(--ats-green);
+    background: var(--ats-blue);
     color: white;
-    border-color: var(--ats-green);
+    border-color: var(--ats-blue);
     font-weight: 500;
 }
 
@@ -145,9 +145,9 @@ body {
     cursor: pointer; 
 }
 .tab-nav .tab.active {
-    color: var(--ats-green);
+    color: var(--ats-blue);
     font-weight: 500;
-    border-bottom: 2px solid var(--ats-green);
+    border-bottom: 2px solid var(--ats-blue);
     margin-bottom: -1px;
 }
 
