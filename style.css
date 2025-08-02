@@ -12,7 +12,7 @@
     
     /* --- AANGEPASTE KLEUREN --- */
     --refer-gradient-start: #86a6c6; /* Oorspronkelijk groen, nu uw kleur */
-    --refer-gradient-end: #86a6c6;   /* Oorspronkelijk blauw, nu uw kleur */
+    --refer-gradient-end: #b2ceeb;   /* Oorspronkelijk blauw, nu uw kleur */
 }
 * { 
     box-sizing: border-box; 
