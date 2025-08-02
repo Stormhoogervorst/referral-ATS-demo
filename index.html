@@ -11,7 +11,7 @@
     <style>
         /* --- Base & Reset --- */
         :root {
-            --ats-green: #8DC63F;
+            --ats-blue: #86a6c6;
             --ats-bg: #F5F5F5;
             --ats-header-bg: #FFFFFF;
             --ats-border: #E0E0E0;
@@ -20,8 +20,8 @@
             --ats-text-light: #9E9E9E;
             --ats-font: 'Roboto', sans-serif;
             --refer-font: 'Inter', sans-serif;
-            --refer-gradient-start: #97d045;
-            --refer-gradient-end: #02527d;
+            --refer-gradient-start: #86a6c6;
+            --refer-gradient-end: #b2ceeb;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -41,7 +41,7 @@
             padding: 0 20px;
             height: 50px;
         }
-        .top-nav .logo { color: var(--ats-green); font-weight: 700; font-size: 18px; }
+        .top-nav .logo { color: var(--ats-blue); font-weight: 700; font-size: 18px; }
         .top-nav .nav-links { display: flex; gap: 20px; margin-left: 30px; }
         .top-nav a { color: var(--ats-text-dark); text-decoration: none; }
 
@@ -54,7 +54,7 @@
             margin-bottom: 20px;
         }
         .vacancy-header .title-group { display: flex; align-items: center; gap: 15px; }
-        .vacancy-header .icon { background: var(--ats-green); color: white; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 4px; }
+        .vacancy-header .icon { background: var(--ats-blue); color: white; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 4px; }
         .vacancy-header .icon svg { width: 24px; height: 24px; }
         .vacancy-header h1 { font-size: 22px; margin: 0; }
         .vacancy-header .recruiter-status { font-size: 13px; color: var(--ats-text-medium); }
@@ -68,9 +68,9 @@
             font-size: 14px;
         }
         .vacancy-header .actions button.refer-btn {
-            background: var(--ats-green);
+            background: var(--ats-blue);
             color: white;
-            border-color: var(--ats-green);
+            border-color: var(--ats-blue);
             font-weight: 500;
         }
 
@@ -105,9 +105,9 @@
         .tab-nav { display: flex; border-bottom: 1px solid var(--ats-border); }
         .tab-nav .tab { padding: 12px 20px; color: var(--ats-text-medium); cursor: pointer; }
         .tab-nav .tab.active {
-            color: var(--ats-green);
+            color: var(--ats-blue);
             font-weight: 500;
-            border-bottom: 2px solid var(--ats-green);
+            border-bottom: 2px solid var(--ats-blue);
             margin-bottom: -1px;
         }
 
@@ -223,7 +223,7 @@
 
     <div class="ats-container">
         <nav class="top-nav">
-            <div class="logo">MySolution</div>
+            <div class="logo">Your ATS</div>
             <div class="nav-links">
                 <a href="#">Dashboard</a>
                 <a href="#">Chatter</a>
